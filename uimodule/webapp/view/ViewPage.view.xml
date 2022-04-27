@@ -1,0 +1,385 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:fb="sap.ui.comp.filterbar" xmlns:l="sap.ui.layout" xmlns:ui="sap.ui.table" xmlns:f="sap.f" controllerName="PM030.APP5.controller.ViewPage">
+    <f:DynamicPage id="dynamicPageId" preserveHeaderStateOnScroll="true" showFooter="false" fitContent="true" class="sapUiContentPadding">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:content>
+ 
+                        <HBox height="100%" alignItems="Center" alignContent="Center" justifyContent="Center">
+            <Title text="{i18n>TitoloGRS}" class="sapUiTinyMarginTop"/>
+          </HBox>
+                </f:content>
+                <f:actions></f:actions>
+                <f:navigationActions>
+                    <Button icon="sap-icon://action-settings" press="onPersoButtonPressed" class="sapUiTinyMarginBegin"/>
+                    <Button icon="sap-icon://download" press="onDataExport" class="sapUiTinyMarginBegin"/>
+                </f:navigationActions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+
+                    <fb:FilterBar id="filterbarPiste" search="onSearchResult" clear="onClearFilter" showClearOnFB="true" showRestoreButton="true" showClearButton="true">
+                        <fb:filterGroupItems>                        
+
+                            <fb:FilterGroupItem id="divisione" visible="true" groupName="__$INTERNAL$" name="div" label="{i18n>Divisione}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                              <fb:control>
+                                <Input type="Text" value="{FilterModel>/Divisione}" required="true" maxLength="4"/>
+                              </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="index" visible="true" groupName="__$INTERNAL$" name="ind" label="{i18n>Index}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                                <fb:control>
+                                    <Input type="Number" value="{FilterModel>/Index}" maxLength="12"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="tipoConferma" visible="true" groupName="__$INTERNAL$" name="ts" label="{i18n>TipoConferma}" partOfCurrentVariant="true" visibleInFilterBar="false">
+                                <fb:control>
+                                    <Input type="Text" value="{FilterModel>/TipoConferma}" maxLength="1"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                           <fb:FilterGroupItem id="dataEsecuzione" visible="true" groupName="__$INTERNAL$" name="ddr" label="{i18n>DataEsecuzione}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                                <fb:control>
+                                    <DatePicker id="DateP1" placeholder="Inserisci giorno" class="sapUiSmallMarginBottom" displayFormat="dd-MM-YYYY" dateValue="{FilterModel>/DataEsecuzione}"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="tipoOrdine" visible="true" groupName="__$INTERNAL$" name="to" label="{i18n>TipoOrdine}" partOfCurrentVariant="true" visibleInFilterBar="false">
+                                <fb:control>
+                                    <Input type="Text" value="{FilterModel>/TipoOrdine}" maxLength="4"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="tipoAttivita" visible="true" groupName="__$INTERNAL$" name="ta" label="{i18n>TipoAttivita}" partOfCurrentVariant="true" visibleInFilterBar="false">
+                                <fb:control>
+                                    <Input type="Text" value="{FilterModel>/TipoAttivita}" maxLength="3"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="indisponibilita" visible="true" groupName="__$INTERNAL$" name="indisp" label="{i18n>Indisponibilita}" partOfCurrentVariant="true" visibleInFilterBar="false">
+                                <fb:control>
+                                    <Input type="Text" value="{FilterModel>/Indisponibilita}" maxLength="1"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="sistema" visible="true" groupName="__$INTERNAL$" name="sis" label="{i18n>Sistema}" partOfCurrentVariant="true" visibleInFilterBar="false">
+                                <fb:control>
+                                    <Input type="Text" value="{FilterModel>/Sistema}" maxLength="2"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="classe" visible="true" groupName="__$INTERNAL$" name="classe" label="{i18n>Classe}" partOfCurrentVariant="true" visibleInFilterBar="false">
+                                <fb:control>
+                                    <Input type="Text" value="{FilterModel>/Classe}" maxLength="2"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="frequenza" visible="true" groupName="__$INTERNAL$" name="frequenza" label="{i18n>Frequenza}" partOfCurrentVariant="true" visibleInFilterBar="false">
+                                <fb:control>
+                                    <Input type="Number" value="{FilterModel>/Frequenza}" maxLength="3"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="frequenzaUm" visible="true" groupName="__$INTERNAL$" name="frequenzaUm" label="{i18n>UMFrequenza}" partOfCurrentVariant="true" visibleInFilterBar="false">
+                                <fb:control>
+                                    <Input type="Number" value="{FilterModel>/UMFrequenza}" maxLength="3"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="impianto" visible="true" groupName="__$INTERNAL$" name="impianto" label="{i18n>Impianto}" partOfCurrentVariant="true" visibleInFilterBar="false">
+                                <fb:control>
+                                    <Input type="Text" value="{FilterModel>/Impianto}" maxLength="40"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="sedeTecnicaComponente" visible="true" groupName="__$INTERNAL$" name="std" label="{i18n>SedeTecnicaComponente}" partOfCurrentVariant="true" visibleInFilterBar="false">
+                                <fb:control>
+                                    <Input type="Text" value="{FilterModel>/SedeTecnicaComponente}" maxLength="40"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="equipment" visible="true" groupName="__$INTERNAL$" name="eq" label="{i18n>Equipment}" partOfCurrentVariant="true" visibleInFilterBar="false">
+                                <fb:control>
+                                    <Input type="Text" value="{FilterModel>/Equipment}" maxLength="18"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="componente" visible="true" groupName="__$INTERNAL$" name="ce" label="{i18n>Componente}" partOfCurrentVariant="true" visibleInFilterBar="false">
+                                <fb:control>
+                                    <Input type="Text" value="{FilterModel>/Componente}" maxLength="80"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="centroDiLavoro" visible="true" groupName="__$INTERNAL$" name="cdl" label="{i18n>CentroDiLavoro}" partOfCurrentVariant="true" visibleInFilterBar="false">
+                                <fb:control>
+                                    <Input type="Text" value="{FilterModel>/CentroDiLavoro}" maxLength="8"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="destinatario" visible="true" groupName="__$INTERNAL$" name="dest" label="{i18n>Destinatario}" partOfCurrentVariant="true" visibleInFilterBar="false">
+                                <fb:control>
+                                    <Input type="Text" value="{FilterModel>/Destinatario}" maxLength="12"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="percorso" visible="true" groupName="__$INTERNAL$" name="perc" label="{i18n>Percorso}" partOfCurrentVariant="true" visibleInFilterBar="false">
+                                <fb:control>
+                                    <Input type="Text" value="{FilterModel>/Percorso}" maxLength="15"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="tipoGestione" visible="true" groupName="__$INTERNAL$" name="tg" label="{i18n>TipoGestione}" partOfCurrentVariant="true" visibleInFilterBar="false">
+                                <fb:control>
+                                    <Input type="Text" value="{FilterModel>/TipoGestione}" maxLength="3"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="finalita" visible="true" groupName="__$INTERNAL$" name="fin" label="{i18n>Finalita}" partOfCurrentVariant="true" visibleInFilterBar="false">
+                                <fb:control>
+                                    <Input type="Text" value="{FilterModel>/Finalita}" maxLength="3"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="grupControllo" visible="true" groupName="__$INTERNAL$" name="gc" label="{i18n>GrupControllo}" partOfCurrentVariant="true" visibleInFilterBar="false">
+                                <fb:control>
+                                    <Input type="Text" value="{FilterModel>/GrupControllo}" maxLength="3"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="ordineConsuntivazione" visible="true" groupName="__$INTERNAL$" name="ocon" label="{i18n>OrdineConsuntivazione}" partOfCurrentVariant="true" visibleInFilterBar="false">
+                                <fb:control>
+                                    <Input type="Text" value="{FilterModel>/OrdineConsuntivazione}" maxLength="12"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="numOpODM" visible="true" groupName="__$INTERNAL$" name="noodm" label="{i18n>NumOpODM}" partOfCurrentVariant="true" visibleInFilterBar="false">
+                                <fb:control>
+                                    <Input type="Text" value="{FilterModel>/NumOpODM}" maxLength="4"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="avviso" visible="true" groupName="__$INTERNAL$" name="av" label="{i18n>Avviso}" partOfCurrentVariant="true" visibleInFilterBar="false">
+                                <fb:control>
+                                    <Input type="Text" value="{FilterModel>/Avviso}" maxLength="12"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="posIntervento" visible="true" groupName="__$INTERNAL$" name="pos" label="{i18n>PosIntervento}" partOfCurrentVariant="true" visibleInFilterBar="false">
+                                <fb:control>
+                                    <Input type="Number" value="{FilterModel>/PosIntervento}" maxLength="4"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="AESistema" visible="true" groupName="__$INTERNAL$" name="aes" label="{i18n>AESistema}" partOfCurrentVariant="true" visibleInFilterBar="false">
+                                <fb:control>
+                                    <Input type="Text" value="{FilterModel>/AESistema}" maxLength="2"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="AEContatore" visible="true" groupName="__$INTERNAL$" name="aec" label="{i18n>AEContatore}" partOfCurrentVariant="true" visibleInFilterBar="false">
+                                <fb:control>
+                                    <Input type="Number" value="{FilterModel>/AEContatore}" maxLength="10"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="AEProgressivo" visible="true" groupName="__$INTERNAL$" name="aep" label="{i18n>AEProgressivo}" partOfCurrentVariant="true" visibleInFilterBar="false">
+                                <fb:control>
+                                    <Input type="Number" value="{FilterModel>/AEProgressivo}" maxLength="5"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="AEClasse" visible="true" groupName="__$INTERNAL$" name="aecl" label="{i18n>AEClasse}" partOfCurrentVariant="true" visibleInFilterBar="false">
+                                <fb:control>
+                                    <Input type="Text" value="{FilterModel>/AEClasse}" maxLength="2"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="AESedeTecnica" visible="true" groupName="__$INTERNAL$" name="aest" label="{i18n>AESedeTecnica}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                                <fb:control>
+                                    <Input type="Text" value="{FilterModel>/AESedeTecnica}" maxLength="30"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="AEEquipment" visible="true" groupName="__$INTERNAL$" name="aee" label="{i18n>AEEquipment}" partOfCurrentVariant="true" visibleInFilterBar="false">
+                                <fb:control>
+                                    <Input type="Text" value="{FilterModel>/AEEquipment}" maxLength="18"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="AEComponenteTipo" visible="true" groupName="__$INTERNAL$" name="aect" label="{i18n>AEComponenteTipo}" partOfCurrentVariant="true" visibleInFilterBar="false">
+                                <fb:control>
+                                    <Input type="Text" value="{FilterModel>/AEComponenteTipo}" maxLength="80"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="AEDescrizioneComponente" visible="true" groupName="__$INTERNAL$" name="aedc" label="{i18n>AEDescrizioneComponente}" partOfCurrentVariant="true" visibleInFilterBar="false">
+                                <fb:control>
+                                    <Input type="Text" value="{FilterModel>/AEDescrizioneComponente}" maxLength="80"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="AEDescrizioneProgressivo" visible="true" groupName="__$INTERNAL$" name="aedp" label="{i18n>AEDescrizioneProgressivo}" partOfCurrentVariant="true" visibleInFilterBar="false">
+                                <fb:control>
+                                    <Input type="Text" value="{FilterModel>/AEDescrizioneProgressivo}" maxLength="40"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+                     <OverflowToolbar style="Clear">
+            <ToolbarSpacer/>
+          <Button text="Crea Avviso" icon="sap-icon://document" class="sapUiTinyMarginBegin"/>
+          <Button text="Crea Avviso Nuova Attività" icon="sap-icon://create" class="sapUiTinyMarginBegin"/>
+          </OverflowToolbar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <ScrollContainer width="100%" height="100%" vertical="true" horizontal="true">
+                <Table id="tbManutenzione" items="{path: 'mManutenzione>/'}"  mode="MultiSelect" sticky="HeaderToolbar,ColumnHeaders">
+                  <columns>
+                        <Column width="15em" id="col1" app:property="Index"><Text text="{i18n>Index}"/></Column>
+                        <Column width="15em" id="col2" app:property="DataEsecuzione"><Text text="{i18n>DataEsecuzione}"/></Column>
+                        <Column width="15em" id="col3" app:property="DataDiScadenzaNaturale"><Text text="{i18n>DataDiScadenzaNaturale}"/></Column>                        
+                        <Column width="15em" id="col4" app:property="TipoAttivitaPM"><Text text="{i18n>TipoAttivitaPM}"/></Column>
+                        <Column width="15em" id="col5" app:property="Impianto"><Text text="{i18n>Impianto}"/></Column>
+                        <Column width="15em" id="col6" app:property="DescrizioneComponente"><Text text="{i18n>DescrizioneComponente}"/></Column>
+                        <Column width="15em" id="col7" app:property="SedeTecnica"><Text text="{i18n>SedeTecnica}"/></Column>
+                        <Column width="15em" id="col8" app:property="Ordine"><Text text="{i18n>Ordine}"/></Column>
+                        <Column width="15em" id="col9" app:property="OperazioneODM"><Text text="{i18n>OperazioneODM}"/></Column>
+                        <Column width="15em" id="col10" app:property="LavoroPianificato"><Text text="{i18n>LavoroPianificato}"/></Column>
+                        <Column width="15em" id="col11" app:property="UMLavoroPianificato"><Text text="{i18n>UMLavoroPianificato}"/></Column>
+                        <Column width="15em" id="col12" app:property="LavoroEffettivo"><Text text="{i18n>LavoroEffettivo}"/></Column>
+                        <Column width="15em" id="col13" app:property="UMLavoroEffettivo"><Text text="{i18n>UMLavoroEffettivo}"/></Column>
+                        <Column width="15em" id="col14" app:property="Avviso"><Text text="{i18n>Avviso}"/></Column>
+                        <Column width="15em" id="col15" app:property="Divisione"><Text text="{i18n>Divisione}"/></Column>
+                        <Column width="15em" id="col16" app:property="TipoConferma"><Text text="{i18n>TipoConferma}"/></Column>
+                        <Column width="15em" id="col17" app:property="TipoOrdine"><Text text="{i18n>TipoOrdine}"/></Column>
+                        <Column width="15em" id="col18" app:property="Indisponibilita"><Text text="{i18n>Indisponibilita}"/></Column>
+                        <Column width="15em" id="col19" app:property="Sistema"><Text text="{i18n>Sistema}"/></Column>
+                        <Column width="15em" id="col20" app:property="Classe"><Text text="{i18n>Classe}"/></Column>  
+                        <Column width="15em" id="col21" app:property="Frequenza"><Text text="{i18n>Frequenza}"/></Column>
+                        <Column width="15em" id="col22" app:property="UMFrequenza"><Text text="{i18n>UMFrequenza}"/></Column>
+                        <Column width="15em" id="col23" app:property="Equipment"><Text text="{i18n>Equipment}"/></Column>
+                        <Column width="15em" id="col24" app:property="Etichetta"><Text text="{i18n>Etichetta}"/></Column>  
+                        <Column width="15em" id="col25" app:property="CentroDiLavoro"><Text text="{i18n>CentroDiLavoro}"/></Column> 
+                        <Column width="15em" id="col26" app:property="Destinatario"><Text text="{i18n>Destinatario}"/></Column>
+                        <Column width="15em" id="col27" app:property="Percorso"><Text text="{i18n>Percorso}"/></Column>  
+                        <Column width="15em" id="col28" app:property="TipoGestione"><Text text="{i18n>TipoGestione}"/></Column>
+                        <Column width="15em" id="col29" app:property="Finalita"><Text text="{i18n>Finalita}"/></Column> 
+                        <Column width="15em" id="col30" app:property="GruppoControlli"><Text text="{i18n>GruppoControlli}"/></Column> 
+                        <Column width="15em" id="col31" app:property="Intervento"><Text text="{i18n>Intervento}"/></Column> 
+                        <Column width="15em" id="col32" app:property="DettagliDellaConferma"><Text text="{i18n>DettagliDellaConferma}"/></Column> 
+                        <Column width="15em" id="col33" app:property="DescrizioneDettagliDelleConferme"><Text text="{i18n>DescrizioneDettagliDelleConferme}"/></Column>   
+                        <Column width="15em" id="col34" app:property="TestoEsteso"><Text text="{i18n>TestoEsteso}"/></Column> 
+                        <Column width="15em" id="col35" app:property="OperazioneODM1"><Text text="{i18n>OperazioneODM1}"/></Column>
+                        <Column width="15em" id="col36" app:property="LavoroPianificato1"><Text text="{i18n>LavoroPianificato1}"/></Column>
+                        <Column width="15em" id="col37" app:property="UMLavoroPianificato1"><Text text="{i18n>UMLavoroPianificato1}"/></Column> 
+                        <Column width="15em" id="col38" app:property="LavoroEffettivo1"><Text text="{i18n>LavoroEffettivo1}"/></Column> 
+                        <Column width="15em" id="col39" app:property="UMLavoroEffettivo1"><Text text="{i18n>UMLavoroEffettivo1}"/></Column> 
+                        <Column width="15em" id="col40" app:property="OperazioneODM2"><Text text="{i18n>OperazioneODM2}"/></Column> 
+                        <Column width="15em" id="col41" app:property="LavoroPianificato2"><Text text="{i18n>LavoroPianificato2}"/></Column>
+                        <Column width="15em" id="col42" app:property="UMLavoroPianificato2"><Text text="{i18n>UMLavoroPianificato2}"/></Column>
+                        <Column width="15em" id="col43" app:property="LavoroEffettivo2"><Text text="{i18n>LavoroEffettivo2}"/></Column> 
+                        <Column width="15em" id="col44" app:property="UMLavoroEffettivo2"><Text text="{i18n>UMLavoroEffettivo2}"/></Column> 
+                        <Column width="15em" id="col45" app:property="OperazioneODM3"><Text text="{i18n>OperazioneODM3}"/></Column>
+                        <Column width="15em" id="col46" app:property="LavoroPianificato3"><Text text="{i18n>LavoroPianificato3}"/></Column>
+                        <Column width="15em" id="col47" app:property="UMLavoroPianificato3"><Text text="{i18n>UMLavoroPianificato3}"/></Column> 
+                        <Column width="15em" id="col48" app:property="LavoroEffettivo3"><Text text="{i18n>LavoroEffettivo3}"/></Column>
+                        <Column width="15em" id="col49" app:property="UMLavoroEffettivo3"><Text text="{i18n>UMLavoroEffettivo3}"/></Column>
+                        <Column width="15em" id="col50" app:property="OperazioneODM4"><Text text="{i18n>OperazioneODM4}"/></Column>
+                        <Column width="15em" id="col51" app:property="LavoroPianificato4"><Text text="{i18n>LavoroPianificato4}"/></Column>
+                        <Column width="15em" id="col52" app:property="UMLavoroPianificato4"><Text text="{i18n>UMLavoroPianificato4}"/></Column>
+                        <Column width="15em" id="col53" app:property="LavoroEffettivo4"><Text text="{i18n>LavoroEffettivo4}"/></Column>
+                        <Column width="15em" id="col54" app:property="UMLavoroEffettivo4"><Text text="{i18n>UMLavoroEffettivo4}"/></Column>
+                        <Column width="15em" id="col55" app:property="OperazioneODM5"><Text text="{i18n>OperazioneODM5}"/></Column>
+                        <Column width="15em" id="col56" app:property="LavoroPianificato5"><Text text="{i18n>LavoroPianificato5}"/></Column>
+                        <Column width="15em" id="col57" app:property="UMLavoroPianificato5"><Text text="{i18n>UMLavoroPianificato5}"/></Column>
+                        <Column width="15em" id="col58" app:property="LavoroEffettivo5"><Text text="{i18n>LavoroEffettivo5}"/></Column>
+                        <Column width="15em" id="col59" app:property="UMLavoroEffettivo5"><Text text="{i18n>UMLavoroEffettivo5}"/></Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem vAlign="Middle" type="Active" press="onPressLine">
+                            <cells>
+                                <Text text="{mManutenzione>Index}"/>
+                                <Text text="{path: 'mManutenzione>DataEsecuzione',
+                                            type: 'sap.ui.model.type.Date',
+                                            formatOptions: {
+                                            pattern: 'dd/MM/yyyy'
+                                            }}"/>
+                                <Text text="{path: 'mManutenzione>DataDiScadenzaNaturale',
+                                            type: 'sap.ui.model.type.Date',
+                                            formatOptions: {
+                                            pattern: 'dd/MM/yyyy'
+                                            }}"/>
+                                <Text text="{mManutenzione>TipoAttivitaPM}"/>
+                                <Text text="{mManutenzione>Impianto}"/>
+                                <Text text="{mManutenzione>DescrizioneComponente}"/>
+                                <Text text="{mManutenzione>SedeTecnica}"/>
+                                <Text text="{mManutenzione>Ordine}"/>
+                                <Text text="{mManutenzione>OperazioneODM}"/>
+                                <Text text="{mManutenzione>LavoroPianificato}"/>
+                                <Text text="{mManutenzione>UMLavoroPianificato}"/>
+                                <Text text="{mManutenzione>LavoroEffettivo}"/>
+                                <Text text="{mManutenzione>UMLavoroEffettivo}"/>
+                                <Text text="{mManutenzione>Avviso}"/>
+                                <Text text="{mManutenzione>Divisione}"/>
+                                <Text text="{mManutenzione>TipoConferma}"/>
+                                <Text text="{mManutenzione>TipoOrdine}"/>
+                                <Text text="{mManutenzione>Indisponibilita}"/>
+                                <Text text="{mManutenzione>Sistema}"/>
+                                <Text text="{mManutenzione>Classe}"/>
+                                <Text text="{mManutenzione>Frequenza}"/>
+                                <Text text="{mManutenzione>UMFrequenza}"/>
+                                <Text text="{mManutenzione>Equipment}"/>
+                                <Text text="{mManutenzione>Etichetta}"/>
+                                <Text text="{mManutenzione>CentroDiLavoro}"/>
+                                <Text text="{mManutenzione>Destinatario}"/>
+                                <Text text="{mManutenzione>Percorso}"/>
+                                <Text text="{mManutenzione>TipoGestione}"/>
+                                <Text text="{mManutenzione>Finalita}"/>
+                                <Text text="{mManutenzione>GruppoControlli}"/>
+                                <Text text="{mManutenzione>Intervento}"/>
+                                <Text text="{mManutenzione>DettagliDellaConferma}"/>
+                                <Text text="{mManutenzione>DescrizioneDettagliDelleConferme}"/>
+                                <Text text="{mManutenzione>TestoEsteso}"/>
+                                <Text text="{mManutenzione>OperazioneODM1}"/>
+                                <Text text="{mManutenzione>LavoroPianificato1}"/>
+                                <Text text="{mManutenzione>UMLavoroPianificato1}"/>
+                                <Text text="{mManutenzione>LavoroEffettivo1}"/>
+                                <Text text="{mManutenzione>UMLavoroEffettivo1}"/>
+                                <Text text="{mManutenzione>OperazioneODM2}"/>
+                                <Text text="{mManutenzione>LavoroPianificato2}"/>
+                                <Text text="{mManutenzione>UMLavoroPianificato2}"/>
+                                <Text text="{mManutenzione>LavoroEffettivo2}"/>                                                               
+                                <Text text="{mManutenzione>UMLavoroEffettivo2}"/>
+                                <Text text="{mManutenzione>OperazioneODM3}"/>
+                                <Text text="{mManutenzione>LavoroPianificato3}"/>
+                                <Text text="{mManutenzione>UMLavoroPianificato3}"/>
+                                <Text text="{mManutenzione>LavoroEffettivo3}"/>
+                                <Text text="{mManutenzione>UMLavoroEffettivo3}"/>
+                                <Text text="{mManutenzione>OperazioneODM4}"/>
+                                <Text text="{mManutenzione>LavoroPianificato4}"/>
+                                <Text text="{mManutenzione>UMLavoroPianificato4}"/>
+                                <Text text="{mManutenzione>LavoroEffettivo4}"/>
+                                <Text text="{mManutenzione>UMLavoroEffettivo4}"/>
+                                <Text text="{mManutenzione>OperazioneODM5}"/>
+                                <Text text="{mManutenzione>LavoroPianificato5}"/>
+                                <Text text="{mManutenzione>UMLavoroPianificato5}"/>
+                                <Text text="{mManutenzione>LavoroEffettivo5}"/>
+                                <Text text="{mManutenzione>UMLavoroEffettivo5}"/>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </ScrollContainer>
+        </f:content>
+        <f:footer>
+            <OverflowToolbar>
+                <ToolbarSpacer/>
+                <ToolbarSpacer/>
+            </OverflowToolbar>
+        </f:footer>
+    </f:DynamicPage>
+</mvc:View>

@@ -62,13 +62,9 @@
       },
       "": {
         "dataSource": "mainService",
-        "preload": true,
+        "preload": false,
         "settings": {
-          "synchronizationMode": "None",
-          "operationMode": "Server",
-          "autoExpandSelect": true,
-          "earlyRequests": true,
-          "groupId": "$direct"
+          "useBatch": false
         }
       }
     },
@@ -96,6 +92,13 @@
           "target": [
             "TargetMainView"
           ]
+        },
+        {
+          "name": "ViewPage",
+          "pattern": "",
+          "target": [
+            "ViewPage"
+          ]
         }
       ],
       "targets": {
@@ -105,6 +108,13 @@
           "clearControlAggregation": false,
           "viewId": "MainView",
           "viewName": "MainView"
+        },
+        "ViewPage": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "ViewPage",
+          "viewName": "ViewPage"
         }
       }
     },
