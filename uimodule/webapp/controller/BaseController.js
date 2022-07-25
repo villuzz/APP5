@@ -60,7 +60,25 @@ sap.ui.define(
             getRouter: function () {
                 return UIComponent.getRouterFor(this);
             },
+            Shpl: async function (ShplName, ShplType, aFilter) {
 
+              var sFilter = {
+                  "ReturnFieldValueSet": [{}]
+              };
+              sFilter.ShplType = ShplType;
+              sFilter.ShplName = ShplName;
+              sFilter.IFilterDataSet = aFilter;
+              // Shlpname Shlpfield Sign Option Low
+  
+              var result = await this._saveHana("/dySearch", sFilter);
+              if (result.ReturnFieldValueSet !== undefined) {
+                  result = result.ReturnFieldValueSet.results;
+              } else {
+                  result = [];
+              }
+  
+              return result;
+          },
             onNavBack: function () {
                 var sPreviousHash = History.getInstance().getPreviousHash();
 
